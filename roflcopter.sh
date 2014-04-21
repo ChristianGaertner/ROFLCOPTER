@@ -1,11 +1,15 @@
 #!/bin/sh
 clear
 
-for (( i = 3; i > 0; i-- )); do
+COUNTDOWN=5
+
+
+while [ $COUNTDOWN -gt 0 ]; do
 	echo "ROFLCOPTER INCOMING"
-	echo $i
+	echo $COUNTDOWN
 	sleep 1s
 	clear
+	COUNTDOWN=$(($COUNTDOWN-1))
 done
 
 clear
