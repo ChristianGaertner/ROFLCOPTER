@@ -51,7 +51,7 @@ function onShutdown
 {
   local msg=$1
 
-  trap "cleanup;echo ; echo ;echo $msg; exit 0" 2
+  trap "cleanup;echo ; echo ;echo $msg; exit 0" EXIT
 }
 
 function main
