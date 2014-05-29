@@ -4,16 +4,16 @@ function cleanup
   clear
 }
 
-function intro
+function countdown
 {
-  local countdown=$1
+  local ccountdown=$1
 
-  while [ $countdown -gt 0 ]; do
+  while [ $ccountdown -gt 0 ]; do
     echo "ROFLCOPTER INCOMING"
-    echo $countdown
+    echo $ccountdown
     sleep 1s
     cleanup
-    countdown=$(($countdown-1))
+    ccountdown=$(($ccountdown-1))
   done
 }
 
@@ -57,7 +57,7 @@ function onShutdown
 function main
 {
   cleanup
-  intro 5
+  countdown 5
 
   local running=true
 
