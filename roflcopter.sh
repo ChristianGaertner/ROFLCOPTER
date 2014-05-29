@@ -72,9 +72,7 @@ function main
   cleanup
   countdown 5
 
-  local running=true
-
-  while $running; do
+  while true; do
     animate 0.4s
   done
 }
