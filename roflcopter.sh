@@ -47,6 +47,18 @@ LOL===__        \
 
 }
 
+function animate
+{
+  local delay=$1
+
+  display 1
+  sleep $delay
+  cleanup
+  display 2
+  sleep $delay
+  cleanup
+}
+
 function onShutdown
 {
   local msg=$1
@@ -63,12 +75,7 @@ function main
   local running=true
 
   while $running; do
-    display 1
-    sleep 0.4s
-    cleanup
-    display 2
-    sleep 0.4s
-    cleanup
+    animate 0.4s
   done
 }
 
