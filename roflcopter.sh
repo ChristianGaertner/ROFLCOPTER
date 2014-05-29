@@ -56,13 +56,13 @@ function onShutdown
 
 function main
 {
+  onShutdown "The copter crashed... :/"
   cleanup
   countdown 5
 
   local running=true
 
   while $running; do
-    onShutdown "The copter crashed... :/"
     display 1
     sleep 0.4s
     cleanup
