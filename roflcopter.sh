@@ -1,24 +1,28 @@
 #!/bin/bash
-clear
+function cleanup
+{
+  clear
+}
 
-COUNTDOWN=5
+function intro
+{
+  local countdown=$1
 
+  while [ $countdown -gt 0 ]; do
+    echo "ROFLCOPTER INCOMING"
+    echo $countdown
+    sleep 1s
+    cleanup
+    countdown=$(($countdown-1))
+  done
+}
 
-while [ $COUNTDOWN -gt 0 ]; do
-	echo "ROFLCOPTER INCOMING"
-	echo $COUNTDOWN
-	sleep 1s
-	clear
-	COUNTDOWN=$(($COUNTDOWN-1))
-done
+function display
+{
+  local step=$1
 
-clear
-
-RUNNING=true
-
-while $RUNNING; do
-	trap "clear;RUNNING=false;echo ; echo ;echo The copter crashed... :/; exit 0" 2
-	echo "
+  if [[ step -eq 1 ]]; then
+    echo "
 ROFL:ROFL:LOL:ROFL:ROF
          __^___
       __/   [] \    
@@ -27,9 +31,8 @@ LOL===__        \
          I   I
         --------/
 "
-sleep 0.4s
-clear
-	echo "
+  elif [[ step -eq 2 ]]; then
+    echo "
           LOL
          __^___
  L    __/   [] \    
@@ -38,18 +41,35 @@ clear
          I   I
         --------/
 "
-sleep 0.4s
-clear
-done
-##
-#
-#echo "
-#ROFL:ROFL:LOL:ROFL:ROFL
-#         __^___
-#      __/   [] \    
-#LOL===__        \ 
-#        \________]
-#         I   I
-#        --------/
-#"
-#clear
+  else
+    echo "Unknown Step $step"
+  fi
+
+}
+
+function onShutdown
+{
+  local msg=$1
+
+  trap "cleanup;echo ; echo ;echo $msg; exit 0" 2
+}
+
+function main
+{
+  cleanup
+  intro 5
+
+  local running=true
+
+  while $running; do
+    onShutdown "The copter crashed... :/"
+    display 1
+    sleep 0.4s
+    cleanup
+    display 2
+    sleep 0.4s
+    cleanup
+  done
+}
+
+main
